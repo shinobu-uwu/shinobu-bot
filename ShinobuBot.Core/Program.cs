@@ -5,7 +5,7 @@ using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using ShinobuBot.Core;
 
-namespace ShinobuBot
+namespace ShinobuBot.Core
 {
     class Program
     {

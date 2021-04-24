@@ -13,6 +13,8 @@ namespace ShinobuBot.Core
         private readonly CommandService _commands;
         private readonly IServiceProvider _services;
 
+        private const string ModulesAssembly = "ShinobuBot.Modules";
+
         public CommandHandlingService(IServiceProvider services)
         {
             _services = services;
@@ -23,7 +25,7 @@ namespace ShinobuBot.Core
         public async Task InitializeAsync()
         {
             await _commands.AddModulesAsync(
-                assembly: Assembly.GetEntryAssembly(),
+                assembly: Assembly.Load(ModulesAssembly),
                 services: _services);
                 _client.MessageReceived += HandleCommandAsync;
         }
