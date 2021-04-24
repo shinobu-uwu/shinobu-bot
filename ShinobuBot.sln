@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShinobuBot.Core", "ShinobuBot.Core\ShinobuBot.Core.csproj", "{8E1E30D8-B87D-4B73-8989-0254FB41F5D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShinobuBot.Modules", "ShinobuBot.Modules\ShinobuBot.Modules.csproj", "{FC7666FF-478E-467F-8329-82CF7BB6FB02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E1E30D8-B87D-4B73-8989-0254FB41F5D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E1E30D8-B87D-4B73-8989-0254FB41F5D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E1E30D8-B87D-4B73-8989-0254FB41F5D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E1E30D8-B87D-4B73-8989-0254FB41F5D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC7666FF-478E-467F-8329-82CF7BB6FB02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC7666FF-478E-467F-8329-82CF7BB6FB02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC7666FF-478E-467F-8329-82CF7BB6FB02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC7666FF-478E-467F-8329-82CF7BB6FB02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
