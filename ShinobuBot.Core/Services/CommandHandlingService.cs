@@ -5,7 +5,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ShinobuBot.Core
+namespace ShinobuBot.Core.Services
 {
     public class CommandHandlingService
     {
