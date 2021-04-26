@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Microsoft.Extensions.DependencyInjection;
+using ShinobuBot.Utils.Embeds;
 
 namespace ShinobuBot.Modules.Commands
 {
@@ -25,21 +26,7 @@ namespace ShinobuBot.Modules.Commands
         [Command("help")]
         public async Task Help()
         {
-            var embedBuilder = new EmbedBuilder()
-                .WithColor(Color.Gold)
-                .WithCurrentTimestamp()
-                .WithTitle("Commands");
-            
-            var modules = _commands.Modules;
-            foreach (var module in modules)
-            {
-                var commands = "";
-                foreach (var command in module.Commands)
-                    commands += $"`{command.Name}` ";
-                embedBuilder.AddField(module.Name, commands);
-            }
-
-            await ReplyAsync(embed: embedBuilder.Build());
+            await ReplyAsync(embed: HelpEmbed.Build(_commands.Modules));
         }
     }
 }
