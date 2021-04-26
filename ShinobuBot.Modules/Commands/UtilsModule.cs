@@ -9,15 +9,11 @@ namespace ShinobuBot.Modules.Commands
 {
     public class UtilsModule : ModuleBase<SocketCommandContext>
     {
-        private readonly IServiceProvider _services;
         private readonly CommandService _commands; 
-
-        private const string ModulesAssembly = "ShinobuBot.Modules";
-
-        public UtilsModule(IServiceProvider services)
+        
+        public UtilsModule(CommandService commands)
         {
-            _services = services;
-            _commands = _services.GetRequiredService<CommandService>();
+            _commands = commands;
         }
         
         [Command("ping")]
