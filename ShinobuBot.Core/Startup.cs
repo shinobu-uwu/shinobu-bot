@@ -2,6 +2,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using ShinobuBot.Core.Services;
+using ShinobuBot.Modules.Database;
 
 namespace ShinobuBot.Core
 {
@@ -12,7 +13,7 @@ namespace ShinobuBot.Core
                 .AddSingleton<DiscordSocketClient>()
                 .AddSingleton<CommandService>()
                 .AddSingleton<CommandHandlingService>()
-                .AddSingleton<LoggingService>();
-
+                .AddSingleton<LoggingService>()
+                .AddSingleton<BotDbContext>();
     }
 }

@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using ShinobuBot.Core.Interfaces;
 
 namespace ShinobuBot.Core.Services
 {
-    public class CommandHandlingService
+    public class CommandHandlingService : IInitializableService
     {
         private readonly DiscordSocketClient _client;
         private readonly CommandService _commands;

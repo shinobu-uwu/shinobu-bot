@@ -3,3 +3,5 @@ launch.sh
 */bin
 */obj
 .vscode
+bot.db*
+Dockerfile

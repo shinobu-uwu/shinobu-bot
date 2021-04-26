@@ -5,10 +5,11 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using ShinobuBot.Core.Interfaces;
 
 namespace ShinobuBot.Core.Services
 {
-    public class LoggingService
+    public class LoggingService : IInitializableService
     {
         private readonly IServiceProvider _services;
         
