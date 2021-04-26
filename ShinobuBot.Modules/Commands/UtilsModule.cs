@@ -20,7 +20,7 @@ namespace ShinobuBot.Modules.Commands
         [Summary("Sends the bot latency")]
         public async Task Ping()
             => await ReplyAsync(
-                $"{Context.Client.Latency}ms");
+                $"Pong in {Context.Client.Latency}ms");
 
         [Command("help")]
         public async Task Help()

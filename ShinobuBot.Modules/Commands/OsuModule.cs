@@ -20,6 +20,7 @@ namespace ShinobuBot.Modules.Commands
             _client = new OsuClient(config);
         }
 
+        // TODO Implement gamemode
         [Command("osu")]
         [Summary("Information about the given osu! user")]
         public async Task OsuUser([Name("Username(s)")] params string[] names)
