@@ -12,10 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ShinobuBot.Utils\ShinobuBot.Utils.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Reference Include="RiotSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
         <HintPath>bin\Debug\net5.0\RiotSharp.dll</HintPath>
       </Reference>
