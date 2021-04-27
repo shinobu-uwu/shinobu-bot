@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using RiotSharp;
-using RiotSharp.Endpoints.ChampionEndpoint;
+using RiotSharp.Endpoints.StaticDataEndpoint.ProfileIcons;
 using RiotSharp.Misc;
 
 namespace ShinobuBot.Modules.Commands
@@ -15,12 +13,15 @@ namespace ShinobuBot.Modules.Commands
         private readonly RiotApi _api = RiotApi.GetDevelopmentInstance(
             Environment.GetEnvironmentVariable("RIOT_API_TOKEN"));
 
-        private string _latestVersion;
-        private List<string> _icons;
+        private readonly string _latestVersion;
+        private readonly ProfileIconListStatic _icons;
+
+        private const int TopChampionsDisplayed = 3;
 
         public LeagueModule()
         {
             _latestVersion = _api.DataDragon.Versions.GetAllAsync().Result[0];
+            _icons = _api.DataDragon.ProfileIcons.GetAllAsync(_latestVersion).Result;
         }
 
         [Command("league")]
@@ -28,30 +29,27 @@ namespace ShinobuBot.Modules.Commands
         {
             foreach (var name in names)
             {
-                var user = await _api.Summoner.GetSummonerByNameAsync(Region.Br, name);
-                var masteries = await _api.ChampionMastery.GetChampionMasteriesAsync(Region.Br, name);
-                var icons = await _api.DataDragon.ProfileIcons.GetAllAsync(_latestVersion);
-                foreach (var item in icons.ProfileIcons.Keys)
-                {
-                    Console.WriteLine(item);
-                }
                 
-                var embedBuilder = new EmbedBuilder()
-                    .WithColor(Color.Red)
-                    .WithCurrentTimestamp()
-                    .WithTitle($"Summoner {user.Name}")
-                    .AddField("Stats", $@"**Level:** {user.Level}
-                                    ");
-            }
-        }
+                var summoner = await _api.Summoner.GetSummonerByNameAsync(Region.Br, name);
 
-        [Command("reloadversion")]
-        [RequireOwner]
-        [Summary("Internal command, reloads the version of the game to the latest")]
-        public async Task ReloadVersion()
-        {
-            var versions = await _api.DataDragon.Versions.GetAllAsync();
-            _latestVersion = versions[0];
+                var embedBuilder = new EmbedBuilder()
+                    .WithCurrentTimestamp()
+                    .WithColor(Color.Red)
+                    .WithTitle($"{summoner.Name}'s profile")
+                    .WithUrl($"https://br.op.gg");
+
+                var topChampions = await _api.ChampionMastery.GetChampionMasteriesAsync(Region.Br, summoner.Id);
+                var formattedChampions = "";
+                for (int i = 0; i < TopChampionsDisplayed; i++)
+                {
+                    var champion = await _api.DataDragon.Champions.GetByIdAsync((int) topChampions[i].ChampionId, _latestVersion);
+                    formattedChampions += $"{champion.Name} - {topChampions[i].ChampionPoints: 0}\n";
+                }
+
+                embedBuilder.AddField("Top Champion", formattedChampions);
+
+                await ReplyAsync(embed: embedBuilder.Build());
+            }
         }
     }
 }
