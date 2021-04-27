@@ -34,8 +34,12 @@ namespace ShinobuBot.Modules.Commands
                 .WithColor(Color.Gold)
                 .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl());
             foreach (var module in _commands.Modules)
+            {
+                var commands = "";
                 foreach (var command in module.Commands)
-                    embedBuilder.AddField(module.Name, $"`{command.Name}`  ");
+                    commands += $"`{command.Name}` ";
+                embedBuilder.AddField(module.Name, commands);
+            }
             
             await ReplyAsync(embed: embedBuilder.Build());
         }
