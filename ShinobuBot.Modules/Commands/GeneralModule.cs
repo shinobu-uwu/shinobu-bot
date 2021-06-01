@@ -21,7 +21,7 @@ namespace ShinobuBot.Modules.Commands
         }
 
         [Command("about")]
-        [Summary("Informations about the bot")]
+        [Summary("Information about the bot")]
         public async Task BotInfo()
         {
             var bot = Context.Client.CurrentUser;

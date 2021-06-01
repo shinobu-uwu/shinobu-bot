@@ -21,7 +21,7 @@ namespace ShinobuBot.Modules.Commands
         }
 
         [Command("league")]
-        [Summary("Returns informations about the give league summoner(s)")]
+        [Summary("Information about league summoner(s)")]
         public async Task League([Name("Username(s)")] params string[] names)
         {
             foreach (var name in names)

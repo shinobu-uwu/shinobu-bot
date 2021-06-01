@@ -18,12 +18,13 @@ namespace ShinobuBot.Modules.Commands
         }
         
         [Command("ping")]
-        [Summary("Sends the bot latency")]
+        [Summary("Pong! The bot's latency")]
         public async Task Ping()
             => await ReplyAsync(
                 $"Pong in {Context.Client.Latency}ms");
 
         [Command("help")]
+        [Summary("What do you think")]
         public async Task Help()
         {
             var embedBuilder = new EmbedBuilder()
