@@ -7,14 +7,9 @@
     <ItemGroup>
       <PackageReference Include="Discord.Net" Version="2.3.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-preview.3.21201.4" />
+      <PackageReference Include="MingweiSamuel.Camille" Version="2.8.1-nightly-2021-05-21-78fa797e5f" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="OsuSharp" Version="5.4.4" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="RiotSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null">
-        <HintPath>bin\Debug\net5.0\RiotSharp.dll</HintPath>
-      </Reference>
     </ItemGroup>
 
 </Project>
