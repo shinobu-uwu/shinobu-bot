@@ -19,5 +19,12 @@ namespace ShinobuBot.Modules.Database
             
             base.OnConfiguring(optionsBuilder);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OsuUser>().HasKey(u => u.DiscordId);
+            
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
