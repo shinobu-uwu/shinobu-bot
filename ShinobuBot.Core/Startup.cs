@@ -14,6 +14,6 @@ namespace ShinobuBot.Core
                 .AddSingleton<CommandService>()
                 .AddSingleton<CommandHandlingService>()
                 .AddSingleton<LoggingService>()
-                .AddSingleton<BotDbContext>();
+                .AddDbContext<BotDbContext>();
     }
 }
