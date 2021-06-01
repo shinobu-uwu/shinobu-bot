@@ -48,7 +48,7 @@ namespace ShinobuBot.Modules.Commands
             var command = _commands.Commands.Where(c => c.Name == commandName).FirstOrDefault();
             if (command is null)
             {
-                await ReplyAsync("No command found");
+                await ReplyAsync("Command not found");
             }
             else
             {
