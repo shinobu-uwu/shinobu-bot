@@ -6,6 +6,7 @@ using Discord.Commands;
 using OsuSharp;
 using ShinobuBot.Models;
 using ShinobuBot.Modules.Database;
+using ShinobuBot.Utils;
 
 namespace ShinobuBot.Modules.Commands
 {
@@ -41,21 +42,8 @@ namespace ShinobuBot.Modules.Commands
                 {
                     gamemode ??= query.DefaultGameMode;
                     var user = await _client.GetUserByUsernameAsync(query.OsuUsername, (GameMode) gamemode);
-
-                    var embed = new EmbedBuilder()
-                        .WithColor(0xE5649D)
-                        .WithCurrentTimestamp()
-                        .WithThumbnailUrl($"http://s.ppy.sh/a/{user.UserId}")
-                        .WithTitle($"{user.Username}'s profile")
-                        .WithUrl($"https://osu.ppy.sh/users/{user.UserId}")
-                        .AddField($"\0",
-                            $@"**Rank:** #{user.Rank} -  #{user.CountryRank} :flag_{user.Country.Name.ToLower()}:
-                            **PP:** {user.PerformancePoints: 0}
-                            **Acc:** {user.Accuracy: .00}%
-                            **Level:** {user.Level: 0}")
-                        .Build();
-                
-                    await ReplyAsync(embed: embed);   
+                    
+                    await ReplyAsync(embed: EmbedFactory.OsuProfile(user));   
                 }
             }
             else
@@ -63,19 +51,7 @@ namespace ShinobuBot.Modules.Commands
                 gamemode ??= 0;
                 var user = await _client.GetUserByUsernameAsync(name, (GameMode) gamemode);
 
-                var embed = new EmbedBuilder()
-                    .WithColor(0xE5649D).WithCurrentTimestamp()
-                    .WithThumbnailUrl($"http://s.ppy.sh/a/{user.UserId}")
-                    .WithTitle($"{user.Username}'s profile")
-                    .WithUrl($"https://osu.ppy.sh/users/{user.UserId}")
-                    .AddField($"Stats", 
-                        $@"**Rank:** #{user.Rank} -  #{user.CountryRank} :flag_{user.Country.Name.ToLower()}:
-                                **PP:** {user.PerformancePoints: 0}
-                                **Acc:** {user.Accuracy: .00}%
-                                **Level:** {user.Level: 0}")
-                    .Build();
-
-                    await ReplyAsync(embed: embed);
+                await ReplyAsync(embed: EmbedFactory.OsuProfile(user));
             }
         }
 
