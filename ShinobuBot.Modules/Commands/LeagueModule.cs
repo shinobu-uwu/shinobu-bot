@@ -7,6 +7,7 @@ using MingweiSamuel.Camille;
 using MingweiSamuel.Camille.Enums;
 using ShinobuBot.Models;
 using ShinobuBot.Modules.Database;
+using ShinobuBot.Utils;
 
 namespace ShinobuBot.Modules.Commands
 {
@@ -37,47 +38,19 @@ namespace ShinobuBot.Modules.Commands
                 else
                 {
                     var summoner = _api.SummonerV4.GetBySummonerName(Region.Get(query.Region), query.SummonerName);
-
-                    var embedBuilder = new EmbedBuilder()
-                        .WithCurrentTimestamp()
-                        .WithColor(Color.Red)
-                        .WithTitle($"{summoner.Name}'s profile");
-
                     var topChampions = await _api.ChampionMasteryV4.GetAllChampionMasteriesAsync(
                         Region.Get(query.Region), summoner.Id);
-                    
-                    var formattedChampions = "";
-                    for (int i = 0; i < TopChampionsDisplayed; i++)
-                    {
-                        var champion = (Champion) topChampions[i].ChampionId;
-                        formattedChampions += $"{champion.Name()} - {topChampions[i].ChampionPoints: 0}\n";
-                    }
 
-                    embedBuilder.AddField("Top Champions", formattedChampions);
-                    await ReplyAsync(embed: embedBuilder.Build());
+                    await ReplyAsync(embed: EmbedFactory.LeagueProfile(summoner, topChampions));
                 }
             }
             else
             {
                 var summoner = _api.SummonerV4.GetBySummonerName(Region.Get(region), name);
-
-                var embedBuilder = new EmbedBuilder()
-                    .WithCurrentTimestamp()
-                    .WithColor(Color.Red)
-                    .WithTitle($"{summoner.Name}'s profile");
-
                 var topChampions = await _api.ChampionMasteryV4.GetAllChampionMasteriesAsync(
                     Region.Get(region), summoner.Id);
-                
-                var formattedChampions = "";
-                for (int i = 0; i < TopChampionsDisplayed; i++)
-                {
-                    var champion = (Champion) topChampions[i].ChampionId;
-                    formattedChampions += $"{champion.Name()} - {topChampions[i].ChampionPoints: 0}\n";
-                }
 
-                embedBuilder.AddField("Top Champions", formattedChampions);
-                await ReplyAsync(embed: embedBuilder.Build());
+                await ReplyAsync(embed: EmbedFactory.LeagueProfile(summoner, topChampions));
             }
         }
 
