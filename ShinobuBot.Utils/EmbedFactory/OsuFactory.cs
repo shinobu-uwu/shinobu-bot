@@ -1,21 +1,10 @@
 using Discord;
-using MingweiSamuel.Camille.ChampionMasteryV4;
-using MingweiSamuel.Camille.SummonerV4;
 using OsuSharp;
-using ShinobuBot.Utils.Formatters;
 
 namespace ShinobuBot.Utils
 {
-    public static class EmbedFactory
+    public static partial class EmbedFactory
     {
-        public static Embed LeagueProfile(Summoner summoner, ChampionMastery[] champions)
-            => new EmbedBuilder()
-            .WithCurrentTimestamp()
-            .WithColor(Color.Red)
-            .WithTitle($"{summoner.Name}'s profile")
-            .AddField("Top Champions", LeagueFormatter.FormatMasteries(champions))
-            .Build();
-        
         public static Embed OsuProfile(User user)
             => new EmbedBuilder()
                 .WithColor(0xE5649D)
