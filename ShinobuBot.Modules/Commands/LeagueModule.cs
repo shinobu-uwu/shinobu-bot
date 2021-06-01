@@ -25,7 +25,7 @@ namespace ShinobuBot.Modules.Commands
         [Remarks(@"- If the username contains space use quotes around it. 
                        - You can search for multiple users separating the usernames by space.
                        - Pass no parameters to search for the summoner name set to your discord ID.")]
-        public async Task League([Name("Username(s)")] params string[] names)
+        public async Task League([Name("Summoner name(s)")] params string[] names)
         {
             foreach (var name in names)
             {
