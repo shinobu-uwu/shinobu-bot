@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
@@ -26,46 +27,45 @@ namespace ShinobuBot.Modules.Commands
 
         [Command("help")]
         [Summary("What do you think")]
-        public async Task Help()
+        [Remarks("If no parameter is specified will list all available commands")]
+        public async Task Help([Name("(Optional) Command name")]string commandName = "")
         {
-            var embedBuilder = new EmbedBuilder()
-                .WithCurrentTimestamp()
-                .WithColor(Color.Gold)
-                .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl());
-            foreach (var module in _commands.Modules)
+            if (commandName != "")
             {
-                var commands = "";
-                foreach (var command in module.Commands
-                    .GroupBy(c => c.Name)  // filter overloaded commands
-                    .Select(y => y.FirstOrDefault()))
-                    commands += $"`{command.Name}` ";
-                
-                embedBuilder.AddField(module.Name, commands);
-            }
-            
-            await ReplyAsync(embed: embedBuilder.Build());
-        }
-
-        [Command("help")]
-        public async Task Help(string commandName)
-        {
-            var command = _commands.Commands.Where(c => c.Name == commandName).FirstOrDefault();
-            if (command is null)
-            {
-                await ReplyAsync("Command not found");
+                var command = _commands.Commands.Where(c => c.Name == commandName).FirstOrDefault();
+                if (command is null)
+                {
+                    await ReplyAsync("Command not found");
+                }
+                else
+                {
+                    var embedBuilder = new EmbedBuilder()
+                        .WithCurrentTimestamp()
+                        .WithColor(Color.Gold)
+                        .AddField("Name", command.Name)
+                        .AddField("Description", command.Summary)
+                        .AddField("Parameters", CommandParametersFormatter.Format(command.Parameters))
+                        .AddField("Remarks", command.Remarks);
+                    await ReplyAsync(embed: embedBuilder.Build());
+                }
             }
             else
             {
                 var embedBuilder = new EmbedBuilder()
                     .WithCurrentTimestamp()
                     .WithColor(Color.Gold)
-                    .AddField("Name", command.Name)
-                    .AddField("Description", command.Summary)
-                    .AddField("Parameters", CommandParametersFormatter.Format(command.Parameters))
-                    .AddField("Remarks", command.Remarks);
-                await ReplyAsync(embed: embedBuilder.Build());
-            }
+                    .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl());
+                foreach (var module in _commands.Modules)
+                {
+                    var commands = "";
+                    foreach (var command in module.Commands)
+                        commands += $"`{command.Name}` ";
+                
+                    embedBuilder.AddField(module.Name, commands);
+                }
             
+                await ReplyAsync(embed: embedBuilder.Build());   
+            }
         }
     }
 }
