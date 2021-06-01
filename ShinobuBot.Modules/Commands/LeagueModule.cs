@@ -31,8 +31,7 @@ namespace ShinobuBot.Modules.Commands
                 var embedBuilder = new EmbedBuilder()
                     .WithCurrentTimestamp()
                     .WithColor(Color.Red)
-                    .WithTitle($"{summoner.Name}'s profile")
-                    .WithUrl($"https://br.op.gg");
+                    .WithTitle($"{summoner.Name}'s profile");
 
                 var topChampions = await _api.ChampionMasteryV4.GetAllChampionMasteriesAsync(Region.BR, summoner.Id);
                 var formattedChampions = "";
