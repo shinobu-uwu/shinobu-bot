@@ -46,7 +46,7 @@ namespace ShinobuBot.Modules.Commands
                         .AddField("Description", command.Summary)
                         .AddField("Parameters", command.Parameters.Count == 0 
                             ? "None" : CommandsFormatter.FormatParameters(command.Parameters))
-                        .AddField("Remarks", command.Remarks == "" ? "None" : command.Remarks);
+                        .AddField("Remarks", string.IsNullOrEmpty(command.Remarks) ? "None" : command.Remarks);
                     await ReplyAsync(embed: embedBuilder.Build());
                 }
             }
