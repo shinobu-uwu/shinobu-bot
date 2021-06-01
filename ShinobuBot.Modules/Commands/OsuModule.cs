@@ -47,7 +47,7 @@ namespace ShinobuBot.Modules.Commands
                         .WithThumbnailUrl($"http://s.ppy.sh/a/{user.UserId}")
                         .WithTitle($"{user.Username}'s profile")
                         .WithUrl($"https://osu.ppy.sh/users/{user.UserId}")
-                        .AddField($"Stats",
+                        .AddField($"\0",
                             $@"**Rank:** #{user.Rank} -  #{user.CountryRank} :flag_{user.Country.Name.ToLower()}:
                             **PP:** {user.PerformancePoints: 0}
                             **Acc:** {user.Accuracy: .00}%
