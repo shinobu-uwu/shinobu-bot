@@ -7,6 +7,7 @@ namespace ShinobuBot.Modules.Database
     public class BotDbContext : DbContext
     {
         public DbSet<OsuUser> OsuUsers { get; set; }
+        public DbSet<LeagueSummoner> LeagueSummoners { get; set; }
 
         public BotDbContext()
         {
@@ -23,7 +24,8 @@ namespace ShinobuBot.Modules.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OsuUser>().HasKey(u => u.DiscordId);
-            
+            modelBuilder.Entity<LeagueSummoner>().HasKey(u => u.DiscordId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

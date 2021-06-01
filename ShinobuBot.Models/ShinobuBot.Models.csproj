@@ -4,4 +4,8 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MingweiSamuel.Camille" Version="2.8.1-nightly-2021-05-21-78fa797e5f" />
+    </ItemGroup>
+
 </Project>
