@@ -1,7 +1,23 @@
+using System;
+using Microsoft.EntityFrameworkCore;
+using ShinobuBot.Models;
+
 namespace ShinobuBot.Modules.Database
 {
-    public class BotDbContext
+    public class BotDbContext : DbContext
     {
-        
+        public DbSet<OsuUser> OsuUsers { get; set; }
+
+        public BotDbContext()
+        {
+            Database.Migrate();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite($"Data Source={AppDomain.CurrentDomain.BaseDirectory}/bot.db");
+            
+            base.OnConfiguring(optionsBuilder);
+        }
     }
 }
