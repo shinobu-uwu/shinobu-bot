@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
@@ -38,6 +39,27 @@ namespace ShinobuBot.Modules.Commands
             }
             
             await ReplyAsync(embed: embedBuilder.Build());
+        }
+
+        [Command("help")]
+        public async Task Help(string commandName)
+        {
+            var command = _commands.Commands.Where(c => c.Name == commandName).FirstOrDefault();
+            if (command is null)
+            {
+                await ReplyAsync("No command found");
+            }
+            else
+            {
+                var embedBuilder = new EmbedBuilder()
+                    .WithCurrentTimestamp()
+                    .WithColor(Color.Gold)
+                    .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl())
+                    .AddField("Name", command.Name)
+                    .AddField("Description", command.Summary);
+                await ReplyAsync(embed: embedBuilder.Build());
+            }
+            
         }
     }
 }
