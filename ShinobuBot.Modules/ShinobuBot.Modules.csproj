@@ -5,11 +5,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Discord.Net" Version="2.3.1" />
+      <PackageReference Include="Discord.Net" Version="2.4.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-preview.3.21201.4" />
       <PackageReference Include="MingweiSamuel.Camille" Version="2.8.1-nightly-2021-05-21-78fa797e5f" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="OsuSharp" Version="5.4.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ShinobuBot.Models\ShinobuBot.Models.csproj" />
+      <ProjectReference Include="..\ShinobuBot.Utils\ShinobuBot.Utils.csproj" />
     </ItemGroup>
 
 </Project>

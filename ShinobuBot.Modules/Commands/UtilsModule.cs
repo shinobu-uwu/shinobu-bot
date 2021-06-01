@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using ShinobuBot.Utils.Formatters;
 
 namespace ShinobuBot.Modules.Commands
 {
@@ -57,6 +58,7 @@ namespace ShinobuBot.Modules.Commands
                     .WithColor(Color.Gold)
                     .AddField("Name", command.Name)
                     .AddField("Description", command.Summary)
+                    .AddField("Parameters", CommandParametersFormatter.Format(command.Parameters))
                     .AddField("Remarks", command.Remarks);
                 await ReplyAsync(embed: embedBuilder.Build());
             }
