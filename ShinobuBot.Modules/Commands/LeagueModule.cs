@@ -5,7 +5,6 @@ using Discord.Commands;
 using MingweiSamuel.Camille;
 using MingweiSamuel.Camille.Enums;
 
-
 namespace ShinobuBot.Modules.Commands
 {
     public class LeagueModule : ModuleBase<SocketCommandContext>
@@ -21,7 +20,7 @@ namespace ShinobuBot.Modules.Commands
         }
 
         [Command("league")]
-        [Summary("Information about league summoner(s)")]
+        [Summary("Information about league summoner")]
         [Remarks(@"- If the username contains space use quotes around it. 
                        - Pass no parameters to search for the summoner name set to your discord ID.")]
         public async Task League([Name("Summoner name")] string name, [Name("Region")] string region)
