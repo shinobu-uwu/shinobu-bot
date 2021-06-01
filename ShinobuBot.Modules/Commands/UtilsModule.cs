@@ -44,8 +44,9 @@ namespace ShinobuBot.Modules.Commands
                         .WithColor(Color.Gold)
                         .AddField("Name", command.Name)
                         .AddField("Description", command.Summary)
-                        .AddField("Parameters", CommandParametersFormatter.Format(command.Parameters))
-                        .AddField("Remarks", command.Remarks);
+                        .AddField("Parameters", command.Parameters.Count == 0 
+                            ? "None" : CommandsFormatter.FormatParameters(command.Parameters))
+                        .AddField("Remarks", command.Remarks == "" ? "None" : command.Remarks);
                     await ReplyAsync(embed: embedBuilder.Build());
                 }
             }

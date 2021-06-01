@@ -4,9 +4,9 @@ using Discord.Commands;
 
 namespace ShinobuBot.Utils.Formatters
 {
-    public static class CommandParametersFormatter
+    public static class CommandsFormatter
     {
-        public static string Format(IReadOnlyList<ParameterInfo> parameters)
+        public static string FormatParameters(IReadOnlyList<ParameterInfo> parameters)
         {
             var formatted = "";
             for (int i = 0; i < parameters.Count - 1; i++)
