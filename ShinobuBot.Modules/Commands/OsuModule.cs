@@ -21,7 +21,7 @@ namespace ShinobuBot.Modules.Commands
 
         // TODO Implement gamemode
         [Command("osu")]
-        [Summary("Information about the given osu! user")]
+        [Summary("Information about the given osu! user(s)")]
         public async Task OsuUser([Name("Username(s)")] params string[] names)
         {
             foreach (var name in names)

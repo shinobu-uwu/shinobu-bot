@@ -21,11 +21,11 @@ namespace ShinobuBot.Modules.Commands
         }
 
         [Command("league")]
+        [Summary("Returns informations about the give league summoner(s)")]
         public async Task League([Name("Username(s)")] params string[] names)
         {
             foreach (var name in names)
             {
-
                 var summoner = _api.SummonerV4.GetBySummonerName(Region.BR, name);
 
                 var embedBuilder = new EmbedBuilder()
