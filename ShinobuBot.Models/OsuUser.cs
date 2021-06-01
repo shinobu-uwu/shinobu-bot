@@ -1,7 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace ShinobuBot.Models
 {
+    /// <summary>
+    /// osu! username related to a discord user ID
+    /// </summary>
     public class OsuUser
     {
         public ulong DiscordId { get; set; }
