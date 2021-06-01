@@ -54,7 +54,6 @@ namespace ShinobuBot.Modules.Commands
                 var embedBuilder = new EmbedBuilder()
                     .WithCurrentTimestamp()
                     .WithColor(Color.Gold)
-                    .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl())
                     .AddField("Name", command.Name)
                     .AddField("Description", command.Summary);
                 await ReplyAsync(embed: embedBuilder.Build());
