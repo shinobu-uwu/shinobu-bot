@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
-using Microsoft.EntityFrameworkCore;
 using OsuSharp;
 using ShinobuBot.Models;
 using ShinobuBot.Modules.Database;
@@ -84,12 +83,23 @@ namespace ShinobuBot.Modules.Commands
 
         [Command("osuset")]
         [Summary("Register an osu! account to your discord ID")]
+        [Remarks(@"- Only account per discord user is allowed.
+                       - Using this command with an username already set will replace it.")]
         public async Task OsuSet([Name("Username")] string username)
         {
-            var user = new OsuUser(Context.User.Id, username);
-            await _context.OsuUsers.AddAsync(user);
+            var user = _context.OsuUsers.SingleOrDefault(u => u.DiscordId == Context.User.Id);
+            if (user is null)
+            {
+                _context.Add(new OsuUser(Context.User.Id, username));
+                await ReplyAsync("User registered!");
+            }
+            else
+            {
+                user.OsuUsername = username;
+                await ReplyAsync("User updated!");
+            }
+            
             await _context.SaveChangesAsync();
-            await ReplyAsync("Registered!");
         }
     }
 }
