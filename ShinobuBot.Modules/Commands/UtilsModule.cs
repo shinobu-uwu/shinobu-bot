@@ -56,7 +56,8 @@ namespace ShinobuBot.Modules.Commands
                     .WithCurrentTimestamp()
                     .WithColor(Color.Gold)
                     .AddField("Name", command.Name)
-                    .AddField("Description", command.Summary);
+                    .AddField("Description", command.Summary)
+                    .AddField("Remarks", command.Remarks);
                 await ReplyAsync(embed: embedBuilder.Build());
             }
             
