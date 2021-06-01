@@ -34,9 +34,12 @@ namespace ShinobuBot.Modules.Commands
                 .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl());
             foreach (var module in _commands.Modules)
             {
-                var commands = "";
-                foreach (var command in module.Commands)
+                var commands = "1";
+                foreach (var command in module.Commands
+                    .GroupBy(c => c.Name)  // filter overloaded commands
+                    .Select(y => y.FirstOrDefault()))  
                     commands += $"`{command.Name}` ";
+                
                 embedBuilder.AddField(module.Name, commands);
             }
             
