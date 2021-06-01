@@ -44,7 +44,7 @@ namespace ShinobuBot.Modules.Commands
                     formattedChampions += $"{champion.Name()} - {topChampions[i].ChampionPoints: 0}\n";
                 }
 
-                embedBuilder.AddField("Top Champion", formattedChampions);
+                embedBuilder.AddField("Top Champions", formattedChampions);
 
                 await ReplyAsync(embed: embedBuilder.Build());
             }
