@@ -15,5 +15,12 @@ namespace ShinobuBot.Utils
                 .AddField("Version", "Alpha")
                 .AddField("Severs joined", context.Client.Guilds.Count)
                 .Build();
+
+        public static Embed Avatar(SocketCommandContext context)
+            => new EmbedBuilder()
+                .WithTitle($"{context.User.Username}#{context.User.Discriminator}'s avatar")
+                .WithColor(0xFCFDA5)
+                .WithImageUrl(context.User.GetAvatarUrl())
+                .Build();
     }
 }

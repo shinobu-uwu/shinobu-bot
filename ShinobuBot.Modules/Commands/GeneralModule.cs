@@ -10,16 +10,8 @@ namespace ShinobuBot.Modules.Commands
         [Command("avatar")]
         [Summary("Sends the user avatar")]
         public async Task Avatar()
-        {
-            var avatar = Context.User.GetAvatarUrl();
-            var embed = new EmbedBuilder()
-                .WithTitle($"{Context.User.Username}#{Context.User.Discriminator}'s avatar")
-                .WithColor(new Color(0xFCFDA5))
-                .WithImageUrl(avatar)
-                .Build();
-            
-            await Context.Channel.SendMessageAsync(embed: embed);
-        }
+            => await Context.Channel.SendMessageAsync(embed: EmbedFactory.Avatar(Context));
+        
 
         [Command("about")]
         [Summary("Information about the bot")]
