@@ -42,8 +42,17 @@ namespace ShinobuBot.Core.Services
                 return;
             
             var context = new SocketCommandContext(_client, message);
-            var prefix = _dbContext.Configurations.SingleOrDefault(c => c.GuildId == context.Guild.Id).Prefix;
-            prefix ??= "!";
+
+            string prefix;
+            try
+            {
+                prefix = _dbContext.Configurations.SingleOrDefault(c => c.GuildId == context.Guild.Id).Prefix;
+            }
+            catch (NullReferenceException)  // Config for the server not in the database, use default prefix
+            {
+                prefix = "!";
+
+            }
             int argPos = 0;
 
             if (!(message.HasStringPrefix(prefix, ref argPos) || message.Author.IsBot))
