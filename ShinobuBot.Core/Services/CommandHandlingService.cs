@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using ShinobuBot.Core.Interfaces;
+using ShinobuBot.Modules.Database;
 
 namespace ShinobuBot.Core.Services
 {
@@ -13,6 +15,7 @@ namespace ShinobuBot.Core.Services
         private readonly DiscordSocketClient _client;
         private readonly CommandService _commands;
         private readonly IServiceProvider _services;
+        private readonly BotDbContext _dbContext;
 
         private const string ModulesAssembly = "ShinobuBot.Modules";
 
@@ -21,6 +24,7 @@ namespace ShinobuBot.Core.Services
             _services = services;
             _client = _services.GetRequiredService<DiscordSocketClient>();
             _commands = _services.GetRequiredService<CommandService>();
+            _dbContext = _services.GetRequiredService<BotDbContext>();
         }
 
         public async Task InitializeAsync()
@@ -38,9 +42,11 @@ namespace ShinobuBot.Core.Services
                 return;
             
             var context = new SocketCommandContext(_client, message);
+            var prefix = _dbContext.Configurations.SingleOrDefault(c => c.GuildId == context.Guild.Id).Prefix;
+            prefix ??= "!";
             int argPos = 0;
 
-            if (!(message.HasCharPrefix('!', ref argPos) || message.Author.IsBot))
+            if (!(message.HasStringPrefix(prefix, ref argPos) || message.Author.IsBot))
                 return;
             
             await _commands.ExecuteAsync(
