@@ -25,6 +25,5 @@ namespace ShinobuBot.Modules.Commands
         [Summary("Information about the bot")]
         public async Task BotInfo()
             => await Context.Channel.SendMessageAsync(embed: EmbedFactory.About(Context));
-        
     }
 }
