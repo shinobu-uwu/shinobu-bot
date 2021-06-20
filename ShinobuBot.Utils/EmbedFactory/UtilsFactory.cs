@@ -15,7 +15,7 @@ namespace ShinobuBot.Utils.Formatters
                 var commands = "";
                 foreach (var command in module.Commands)
                     commands += $"`{command.Name}` ";
-                builder.AddField(module.Name, commands);
+                builder.AddField(module.Name.Split("Module")[0], commands);
             }
 
             return builder.Build();
