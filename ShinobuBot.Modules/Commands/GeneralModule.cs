@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
+using ShinobuBot.Utils;
 
 namespace ShinobuBot.Modules.Commands
 {
@@ -23,18 +24,7 @@ namespace ShinobuBot.Modules.Commands
         [Command("about")]
         [Summary("Information about the bot")]
         public async Task BotInfo()
-        {
-            var bot = Context.Client.CurrentUser;
-            var embed = new EmbedBuilder()
-                .WithTitle("About myself!")
-                .WithThumbnailUrl(bot.GetAvatarUrl())
-                .AddField("Creator", "Shinobu#9452")
-                .AddField("Version", "Alpha")
-                .AddField("Servers joined", Context.Client.Guilds.Count)
-                .WithColor(0xf4f16d)
-                .Build();
-
-            await Context.Channel.SendMessageAsync(embed: embed);
-        }
+            => await Context.Channel.SendMessageAsync(embed: EmbedFactory.About(Context));
+        
     }
 }
