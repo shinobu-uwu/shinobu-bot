@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="discord.net" Version="2.4.0" />
       <PackageReference Include="MingweiSamuel.Camille" Version="2.8.1-nightly-2021-05-21-78fa797e5f" />
     </ItemGroup>
 
