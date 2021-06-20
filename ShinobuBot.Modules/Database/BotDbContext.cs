@@ -8,6 +8,7 @@ namespace ShinobuBot.Modules.Database
     {
         public DbSet<OsuUser> OsuUsers { get; set; }
         public DbSet<LeagueSummoner> LeagueSummoners { get; set; }
+        public DbSet<ServerConfiguration> Configurations { get; set; }
 
         public BotDbContext()
         {
@@ -25,6 +26,7 @@ namespace ShinobuBot.Modules.Database
         {
             modelBuilder.Entity<OsuUser>().HasKey(u => u.DiscordId);
             modelBuilder.Entity<LeagueSummoner>().HasKey(u => u.DiscordId);
+            modelBuilder.Entity<ServerConfiguration>().HasKey(c => c.GuildId);
 
             base.OnModelCreating(modelBuilder);
         }
