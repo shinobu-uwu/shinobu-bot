@@ -39,15 +39,7 @@ namespace ShinobuBot.Modules.Commands
                 }
                 else
                 {
-                    var embedBuilder = new EmbedBuilder()
-                        .WithCurrentTimestamp()
-                        .WithColor(Color.Gold)
-                        .AddField("Name", command.Name)
-                        .AddField("Description", command.Summary)
-                        .AddField("Parameters", command.Parameters.Count == 0 
-                            ? "None" : CommandsFormatter.FormatParameters(command.Parameters))
-                        .AddField("Remarks", string.IsNullOrEmpty(command.Remarks) ? "None" : command.Remarks);
-                    await ReplyAsync(embed: embedBuilder.Build());
+                    await ReplyAsync(embed: EmbedFactory.CommandInfo(command));
                 }
             }
             else
@@ -65,7 +57,7 @@ namespace ShinobuBot.Modules.Commands
                     embedBuilder.AddField(module.Name, commands);
                 }
             
-                await ReplyAsync(embed: embedBuilder.Build());   
+                await ReplyAsync(embed: EmbedFactory.ListCommands(_commands.Modules));   
             }
         }
     }
