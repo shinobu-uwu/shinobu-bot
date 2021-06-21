@@ -15,8 +15,6 @@ namespace ShinobuBot.Modules.Commands
         private readonly RiotApi _api;
         private readonly BotDbContext _context;
         
-        private const int TopChampionsDisplayed = 3;
-
         public LeagueModule(BotDbContext botDbContext)
         {
             _api = RiotApi.NewInstance(Environment.GetEnvironmentVariable("RIOT_API_TOKEN"));
@@ -72,6 +70,29 @@ namespace ShinobuBot.Modules.Commands
             }
             
             await _context.SaveChangesAsync();
+        }
+
+        [Command("leaguehistory")]
+        [Summary("The last 10 games of a League of Legends summoner.")]
+        public async Task LeagueHistory([Name("Summoner name")]string summonerName = "", [Name("Region")]string region = "")
+        {
+            var summonerRegion = Region.Get(region);
+            var summoner = await _api.SummonerV4.GetBySummonerNameAsync(summonerRegion, summonerName);
+            if (summoner is null)
+            {
+                await ReplyAsync("User not found");
+                return;
+            }
+            var matchList = await _api.MatchV4.GetMatchlistAsync(
+                summonerRegion,
+                summoner.AccountId,
+                endIndex: 10);
+            var matchTasks = matchList.Matches.Select(
+                matchData => _api.MatchV4.GetMatchAsync(summonerRegion, matchData.GameId)
+            ).ToArray();
+            var history = await Task.WhenAll(matchTasks);
+
+            await ReplyAsync(embed: EmbedFactory.LeagueHistory(summoner, history));
         }
     }
 }
