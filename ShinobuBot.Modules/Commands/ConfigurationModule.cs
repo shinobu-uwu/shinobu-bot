@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Discord;
 using Discord.Commands;
 using ShinobuBot.Models;
 using ShinobuBot.Modules.Database;
@@ -17,6 +18,8 @@ namespace ShinobuBot.Modules.Commands
 
         [Command("prefixset")]
         [Summary("Sets the bot prefix for this server")]
+        [Remarks("Administrator powers are needed to use this command.")]
+        [RequireUserPermission(GuildPermission.Administrator)]
         public async Task PrefixSet([Name("Prefix")]string prefix)
         {
             var config = _dbContext.Configurations.SingleOrDefault(c => c.GuildId == Context.Guild.Id);
@@ -27,6 +30,8 @@ namespace ShinobuBot.Modules.Commands
                 config.Prefix = prefix;
 
             await _dbContext.SaveChangesAsync();
+
+            await ReplyAsync("Prefix set!");
         }
     }
 }
