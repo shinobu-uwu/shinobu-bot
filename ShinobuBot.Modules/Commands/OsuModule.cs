@@ -26,6 +26,7 @@ namespace ShinobuBot.Modules.Commands
         
         [Command("osu")]
         [Summary("Information about osu! user(s).")]
+        [Alias("o")]
         [Remarks(@"- If the username contains space use quotes around it. 
                        - Pass no parameters to search for the username set to your discord ID with your default Gamemode.
                        - Gamemodes: 0: Std, 1: Taiko, 2: Ctb, 3: Mania")]
@@ -56,6 +57,7 @@ namespace ShinobuBot.Modules.Commands
 
         [Command("osuset")]
         [Summary("Register an osu! account to your discord ID")]
+        [Alias("os")]
         [Remarks(@"- Only account per discord user is allowed.
                        - Using this command with an username already set will replace it.
                        - Gamemodes: 0: Std, 1: Taiko, 2: Ctb, 3: Mania")]

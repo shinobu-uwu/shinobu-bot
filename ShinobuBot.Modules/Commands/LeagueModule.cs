@@ -23,6 +23,7 @@ namespace ShinobuBot.Modules.Commands
 
         [Command("league")]
         [Summary("Information about league summoner")]
+        [Alias("l")]
         [Remarks(@"- If the username contains space use quotes around it. 
                        - Pass no parameters to search for the summoner set to your discord ID.")]
         public async Task League([Name("Summoner name")] string name = "", [Name("Region")] string region = "")
@@ -52,6 +53,7 @@ namespace ShinobuBot.Modules.Commands
         }
 
         [Command("leagueset")]
+        [Alias("ls")]
         [Summary("Register a League of Legends summoner to your discord ID")]
         [Remarks("Unlike osuset, this command doesn't set a default region, you must specify it.")]
         public async Task LeagueSet([Name("Username")] string summonerName, [Name("Region")] string region)
@@ -73,6 +75,7 @@ namespace ShinobuBot.Modules.Commands
         }
 
         [Command("leaguehistory")]
+        [Alias("lh")]
         [Summary("The last 10 games of a League of Legends summoner.")]
         public async Task LeagueHistory([Name("Summoner name")]string summonerName = "", [Name("Region")]string region = "")
         {
