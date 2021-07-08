@@ -15,8 +15,9 @@ dotnet run --project=ShinobuBot.Core/ShinobuBot.Core.csproj
 ```
 
 ## Create your own commands module
-Create a new class in `ShinobuBot.Modules/Commands` and make it inherit from `ModuleBase<SocketCommandContext>`, so Discord.Net can identify it as a command module.
-You can use (dependency injection)[https://www.tutorialsteacher.com/ioc/dependency-injection], some services already are already implemented like DbContext and CommandHandling (see ShinobuBot.Core/Startup.cs for all the services).
+- Create a new class in `ShinobuBot.Modules/Commands` and make it inherit from `ModuleBase<SocketCommandContext>`, so Discord.Net can identify it as a command module.
+
+- You can use [dependency injection](https://www.tutorialsteacher.com/ioc/dependency-injection), some services already are already implemented like DbContext and CommandHandling (see ShinobuBot.Core/Startup.cs for all the services).
 
 ## TODO
 * A GUI implementation
