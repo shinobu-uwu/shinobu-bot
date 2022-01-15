@@ -1,5 +1,3 @@
-using Discord;
-
 namespace ShinobuBot.Models
 {
     public class ServerConfiguration
