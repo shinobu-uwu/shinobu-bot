@@ -31,7 +31,7 @@ namespace ShinobuBot.Modules.Commands
                        - Pass no parameters to search for the username set to your discord ID with your default Gamemode.
                        - Gamemodes: 0: Std, 1: Taiko, 2: Ctb, 3: Mania")]
         public async Task OsuUser([Name("Username")] string name = "",
-            [Name("Gamemode (std if not specified)")]int? gamemode = null)
+            [Name("Gamemode (std if not specified)")]int? gameMode = null)
         {
             if ("".Equals(name))
             {
@@ -40,16 +40,16 @@ namespace ShinobuBot.Modules.Commands
                     await ReplyAsync("User not registered");
                 else
                 {
-                    gamemode ??= query.DefaultGameMode;
-                    var user = await _client.GetUserByUsernameAsync(query.OsuUsername, (GameMode) gamemode);
+                    gameMode ??= query.DefaultGameMode;
+                    var user = await _client.GetUserByUsernameAsync(query.OsuUsername, (GameMode) gameMode);
                     
                     await ReplyAsync(embed: EmbedFactory.OsuProfile(user));   
                 }
             }
             else
             {
-                gamemode ??= 0;
-                var user = await _client.GetUserByUsernameAsync(name, (GameMode) gamemode);
+                gameMode ??= 0;
+                var user = await _client.GetUserByUsernameAsync(name, (GameMode) gameMode);
 
                 await ReplyAsync(embed: EmbedFactory.OsuProfile(user));
             }
