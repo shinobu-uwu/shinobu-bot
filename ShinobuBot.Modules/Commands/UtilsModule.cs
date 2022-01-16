@@ -28,37 +28,23 @@ namespace ShinobuBot.Modules.Commands
         [Command("help")]
         [Summary("What do you think")]
         [Remarks("If no parameter is specified will list all available commands")]
-        public async Task Help([Name("(Optional) Command name")]string commandName = "")
+        public async Task Help([Name("(Optional) Command name")] string commandName = "")
         {
-            if (commandName != "")
+            if (commandName == "")
             {
-                var command = _commands.Commands.Where(c => c.Name == commandName).FirstOrDefault();
-                if (command is null)
-                {
-                    await ReplyAsync("Command not found");
-                }
-                else
-                {
-                    await ReplyAsync(embed: EmbedFactory.CommandInfo(command));
-                }
-            }
-            else
-            {
-                var embedBuilder = new EmbedBuilder()
-                    .WithCurrentTimestamp()
-                    .WithColor(Color.Gold)
-                    .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl());
-                foreach (var module in _commands.Modules)
-                {
-                    var commands = "";
-                    foreach (var command in module.Commands)
-                        commands += $"`{command.Name}` ";
-                
-                    embedBuilder.AddField(module.Name, commands);
-                }
-            
                 await ReplyAsync(embed: EmbedFactory.ListCommands(_commands.Modules));   
+                return;
             }
+            
+            var command = _commands.Commands.FirstOrDefault(c => c.Name == commandName);
+            
+            if (command is null)
+            {
+                await ReplyAsync("Command not found");
+                return;
+            }
+            
+            await ReplyAsync(embed: EmbedFactory.CommandInfo(command));
         }
     }
 }
