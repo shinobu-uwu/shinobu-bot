@@ -1,39 +1,29 @@
-﻿using System;
-using System.Reflection;
+using System;
 using System.Threading.Tasks;
 using Discord;
-using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
+using ShinobuBot.Core;
 using ShinobuBot.Core.Services;
 
-namespace ShinobuBot.Core
+MainAsync().GetAwaiter().GetResult();
+
+async Task MainAsync()
 {
-    class Program
-    {
-        static void Main(string[] args)
-            => new Program().MainAsync().GetAwaiter().GetResult();
+    using var services = ConfigureServices();
+    var client = services.GetRequiredService<DiscordSocketClient>();
+        
+    await services.GetRequiredService<LoggingService>().InitializeAsync();
+    await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
-        public async Task MainAsync()
-        {
-            using (var services = ConfigureServices())
-            {
-                var client = services.GetRequiredService<DiscordSocketClient>();
-                
-                await services.GetRequiredService<LoggingService>().InitializeAsync();
-                await services.GetRequiredService<CommandHandlingService>().InitializeAsync();
+    var token = Environment.GetEnvironmentVariable("DISCORD_TOKEN");
+    await client.LoginAsync(TokenType.Bot, token);
+    await client.StartAsync();
 
-                var token = Environment.GetEnvironmentVariable("DISCORD_TOKEN");
-                await client.LoginAsync(TokenType.Bot, token);
-                await client.StartAsync();
+    await Task.Delay(-1);
+}
 
-                await Task.Delay(-1);
-            }
-        }
-
-        private ServiceProvider ConfigureServices()
-        {
-            return Startup.ConfigureServices().BuildServiceProvider();
-        }
-    }
+ServiceProvider ConfigureServices()
+{
+    return Startup.ConfigureServices().BuildServiceProvider();
 }
