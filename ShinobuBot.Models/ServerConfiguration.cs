@@ -1,10 +1,8 @@
-using Discord;
-
 namespace ShinobuBot.Models
 {
     public class ServerConfiguration
     {
-        public ulong GuildId { get; set; }
+        public ulong GuildId { get; }
         public string Prefix { get; set; }
 
         public ServerConfiguration(ulong guildId, string prefix)

@@ -53,7 +53,7 @@ namespace ShinobuBot.Core.Services
                 prefix = "!";
 
             }
-            int argPos = 0;
+            var argPos = 0;
 
             if (!(message.HasStringPrefix(prefix, ref argPos) || message.Author.IsBot))
                 return;
